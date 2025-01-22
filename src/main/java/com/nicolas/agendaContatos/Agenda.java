@@ -2,7 +2,6 @@ package com.nicolas.agendaContatos;
 import java.util.ArrayList;
 
 public class Agenda {
-
     private String nomeDono;
     private ArrayList<Contatos> contatos;
     private Contatos CacheContatos;
