@@ -1,6 +1,5 @@
 package com.nicolas.agendaContatos;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import com.nicolas.ambienteDados.AmbienteDados;
 
@@ -8,23 +7,18 @@ public class MainAgenda {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Agenda AgendaNicolas = new Agenda();
-        System.out.println("Qual o nome dessa Agenda: ");
-        AgendaNicolas.setNomeDono(scan.next());
-        ArrayList<Contatos> contatos = new ArrayList<>();
         boolean PainelAddContato = false;
-        String Continue = "";
         AmbienteDados mani = new AmbienteDados();
 
         while (true) {
             System.out.println("Digite Uma Opção: ");
             System.out.println("1 - Ver o nome de todos os contatos: ");
-            System.out.println("2 - Buscar o telefone de um contato esspecifico: "); //essa opção vai virar "buscar um contato esspecifico" retornando todas as colunas referente ao contato
+            System.out.println("2 - Buscar o telefone de um contato esspecifico: ");
             System.out.println("3 - Adicionar um contato: ");
             System.out.println("4 - Alterar um contato: ");
             System.out.println("5 - Deletar um contato: ");
             System.out.println("6 - Criar uma nova agenda: ");
-
+            System.out.println("7 - Buscar endereco de um contato: ");
 
             int opt = scan.nextInt();
 
@@ -36,14 +30,21 @@ public class MainAgenda {
                     System.out.println("Qual o nome do Contato");
                     String nome = scan.next();
                     mani.SelecionarTelefoneDoContato(nome);
+                    scan.close();
                     break;
                 case 3:
+                    PainelAddContato = true;
                     break;
                 case 4:
                     break;
                 case 5:
                     break;
                 case 6:
+                    break;
+                case 7:
+                    System.out.println("Qual o nome do Contato");
+                    String nomeC = scan.next();
+                    mani.SelecionarEnderecoDoContato(nomeC);
                     break;
                 default:
                     System.out.println("opção invalida");
@@ -81,49 +82,16 @@ public class MainAgenda {
             tel.setNumero(scan.next());
             scan.nextLine();
             System.out.println("Digite o tipo de Aparelho do " + cont1.getNome());
-            tel.setNumero(scan.next());
+            tel.setTipo(scan.next());
             scan.nextLine();
             cont1.setTelefone(tel);
             tel = null;
             end = null;
-            contatos.add(cont1);
+            mani.AdicionarUmContato(cont1); //Adicionando contato no banco
             cont1 = null;
-
-            //INSERIR CONTATO CRIADO NA AGENDA Esspecificada.
-
-            while (true) {
-                System.out.println("Deseja Adicionar Mais algum contato? sim/nao ");
-                Continue = scan.next().toLowerCase();
-                if (Continue.equals("sim")) {
-                    PainelAddContato = true;
-                    break;
-                } else if (Continue.equals("nao")) {
-                    PainelAddContato = false;
-                    break;
-                } else {
-                    System.err.println("Invalido responda com sim ou nao");
-                }
-            }
+            PainelAddContato = false;
         }
 
-        //AgendaNicolas.setContatos(contatos);
-        boolean painel = false;
-        while (painel) {
-            System.out.println("Digite o nome do contado que voce quer o numero: ");
-            String nome = scan.next().toLowerCase();
-            String NumeroContato = AgendaNicolas.getNuemroDoContato(nome);
-            String EnderecoContato = AgendaNicolas.getEnderecoContato(nome);
-
-            System.out.println(EnderecoContato);
-            System.out.println(NumeroContato);
-            
-            boolean e;
-            do {
-                System.out.println("Sair? ");
-                e = !scan.nextBoolean();
-            } while (e != false && e != true);
-            painel = e;
-        }
         scan.close();
     }
 }
