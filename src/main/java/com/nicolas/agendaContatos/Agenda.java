@@ -1,13 +1,13 @@
 package com.nicolas.agendaContatos;
 
 public class Agenda {
-    private String nomeDono;
+    private static String nomeDono;
 
-    public String getNomeDono() {
+    public static String getNomeDono() {
         return nomeDono;
     }
 
-    public void setNomeDono(String nomeDono) {
-        this.nomeDono = nomeDono;
+    public static void setNomeDono(String _nomeDono) {
+        nomeDono = _nomeDono;
     }
 }

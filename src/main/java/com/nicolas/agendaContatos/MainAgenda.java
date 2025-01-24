@@ -1,14 +1,23 @@
 package com.nicolas.agendaContatos;
 
 import java.util.Scanner;
-import com.nicolas.ambienteDados.AmbienteDados;
+
+import com.nicolas.ambienteDados.AdicionarContato;
+import com.nicolas.ambienteDados.CriarAgenda;
+import com.nicolas.ambienteDados.DeletarContato;
+import com.nicolas.ambienteDados.EditarContato;
+import com.nicolas.ambienteDados.SelectDados;
 
 public class MainAgenda {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         boolean PainelAddContato = false;
-        AmbienteDados mani = new AmbienteDados();
+        EditarContato editCont = new EditarContato();
+        AdicionarContato adicionarCont = new AdicionarContato();
+        SelectDados selecionar = new SelectDados();
+        DeletarContato deleteC = new DeletarContato();
+        CriarAgenda Agenda = new CriarAgenda();
 
         while (true) {
             System.out.println("Digite Uma Opção: ");
@@ -24,27 +33,40 @@ public class MainAgenda {
 
             switch (opt) {
                 case 1:
-                    mani.SelecionarTodosOsNomesDosContatos();
+                    selecionar.SelecionarTodosOsNomesDosContatos();
                     break;
                 case 2:
                     System.out.println("Qual o nome do Contato");
-                    String nome = scan.next();
-                    mani.SelecionarTelefoneDoContato(nome);
+                    String Selectnome = scan.next();
+                    selecionar.SelecionarTelefoneDoContato(Selectnome, true, -1, "");
                     scan.close();
                     break;
                 case 3:
                     PainelAddContato = true;
                     break;
                 case 4:
+                    System.out.println("Qual o nome do Contato que voce deseja alterar?");
+                    String editNome = scan.next();
+                    editCont.EditarContatoPainel(editNome);
+                    scan.close();
                     break;
                 case 5:
+                    System.out.println("Qual o nome do Contato que voce deseja Deletar? (nao ha como recuperar)");
+                    String deleteNome = scan.next();
+                    deleteC.DeletarUmContato(deleteNome);
+                    scan.close(); 
                     break;
                 case 6:
+                    System.out.println("Qual o nome da Agenda? ");
+                    String CriarAgendaNome = scan.next();
+                    Agenda.Criar(CriarAgendaNome);
+                    scan.close(); 
                     break;
                 case 7:
                     System.out.println("Qual o nome do Contato");
-                    String nomeC = scan.next();
-                    mani.SelecionarEnderecoDoContato(nomeC);
+                    String selectNomeEnd = scan.next();
+                    selecionar.SelecionarEnderecoDoContato(selectNomeEnd, true, -1, "");
+                    scan.close();
                     break;
                 default:
                     System.out.println("opção invalida");
@@ -87,7 +109,7 @@ public class MainAgenda {
             cont1.setTelefone(tel);
             tel = null;
             end = null;
-            mani.AdicionarUmContato(cont1); //Adicionando contato no banco
+            adicionarCont.AdicionarUmContato(cont1, "Digite o nome da agenda onde Voce quer adicionar o contato: "); //Adicionando contato no banco
             cont1 = null;
             PainelAddContato = false;
         }
